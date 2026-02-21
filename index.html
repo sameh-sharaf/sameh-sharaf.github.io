@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sameh Sharaf - Senior Data Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --accent: #2563eb;
+            --accent-hover: #1e40af;
+            --border: #e5e5e5;
+            --code-bg: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header / Hero */
+        header {
+            padding: 120px 0 80px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .subtitle {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 16px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+            animation: slideUp 0.8s ease-out 0.1s both;
+        }
+
+        .tagline {
+            font-size: 22px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            font-weight: 300;
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            z-index: 100;
+            animation: slideDown 0.5s ease-out 0.3s both;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border);
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.4s; }
+        section:nth-child(2) { animation-delay: 0.5s; }
+        section:nth-child(3) { animation-delay: 0.6s; }
+        section:nth-child(4) { animation-delay: 0.7s; }
+
+        h2 {
+            font-size: 14px;
+            font-family: 'IBM Plex Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        h2::before {
+            content: '//';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        h3 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .skill-category h4 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            font-size: 16px;
+            color: var(--text-secondary);
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category li:hover {
+            color: var(--accent);
+            padding-left: 8px;
+        }
+
+        /* Projects */
+        .project {
+            margin-bottom: 60px;
+            padding: 40px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.4s ease;
+        }
+
+        .project:hover::before {
+            height: 100%;
+        }
+
+        .project:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 16px;
+        }
+
+        .project h3 {
+            font-size: 24px;
+        }
+
+        .tech-stack {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 20px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+            margin-top: 16px;
+            transition: gap 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 12px;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--border) 100%);
+        }
+
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -45px;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--bg-primary);
+        }
+
+        .timeline-date {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: var(--accent);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .timeline-role {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .timeline-company {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        /* Contact */
+        .contact-links {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 28px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+
+            .tagline {
+                font-size: 18px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            nav ul {
+                gap: 20px;
+                font-size: 12px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .project {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sameh Sharaf</h1>
+            <div class="subtitle">Senior Data Engineer</div>
+            <p class="tagline">15 years building large-scale data infrastructure and exploring AI/ML frontiers.</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="about">
+            <div class="container">
+                <h2>About</h2>
+                <p>I'm a Senior Data Engineer with over 15 years of experience building and delivering large-scale data solutions across multiple industries and continents. Currently based in Berlin, Germany, I specialize in building robust ETL pipelines, data lakehouses, and cloud-native infrastructure that powers data-driven decision making at scale.</p>
+                
+                <p>I've led and built 100+ production pipelines to modern data lakehouse architecture, implementing comprehensive monitoring, fault handling, and data quality governance. My career spans work with enterprise clients across retail, finance, healthcare, and telecommunications, delivering solutions on AWS, GCP, and MS Azure that handle petabytes of data efficiently.</p>
+                
+                <p>Currently, I am expanding into AI/ML through Georgia Tech's Machine Learning program and hands-on projects involving LLMs, deep learning, and agentic engineering. I'm passionate about bridging the gap between data engineering and machine learning operations, building the infrastructure that enables AI systems to thrive in production environments.</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2>Skills & Technologies</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Big Data & Databases</h4>
+                        <ul>
+                            <li>Apache Spark</li>
+                            <li>Databricks</li>
+                            <li>AWS Redshift</li>
+                            <li>PostgreSQL</li>
+                            <li>Oracle PL/SQL</li>
+                            <li>DynamoDB</li>
+                            <li>Google BigQuery</li>
+                            <li>Elastic Stack</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Cloud & Orchestration</h4>
+                        <ul>
+                            <li>AWS (S3, Lambda, EC2)</li>
+                            <li>Google Cloud Platform</li>
+                            <li>Microsoft Azure</li>
+                            <li>Apache Airflow</li>
+                            <li>MLflow</li>
+                            <li>Docker & Kubernetes</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>AI/ML & Programming</h4>
+                        <ul>
+                            <li>AWS SageMaker & Bedrock</li>
+                            <li>LLMs & Agentic Engineering</li>
+                            <li>Deep Learning (RNN, CNN)</li>
+                            <li>PyTorch & Scikit-Learn</li>
+                            <li>Python</li>
+                            <li>Go</li>
+                            <li>FastAPI</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>DevOps & Monitoring</h4>
+                        <ul>
+                            <li>GitLab CI/CD</li>
+                            <li>DataDog</li>
+                            <li>Grafana</li>
+                            <li>Bugsnag</li>
+                            <li>Sentry</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2>Featured Projects</h2>
+                
+                <div class="project">
+                    <div class="project-header">
+                        <h3>Data Lakehouse Migration</h3>
+                    </div>
+                    <p>Led the migration of 100+ production ETL pipelines from legacy Oracle and Exasol systems to a modern data lakehouse architecture on AWS and Databricks. Implemented comprehensive monitoring, fault handling, and data quality governance, delivering significant cost savings through infrastructure modernisation and optimised cloud resource utilisation.</p>
+                    <div class="tech-stack">Apache Airflow • AWS • Databricks • Python • Data Governance</div>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <h3>Podcast Transcript & Emotion Recognition Pipeline</h3>
+                    </div>
+                    <p>Built end-to-end subtitle generation pipeline integrating HuggingFace speech-to-text and emotion recognition models to automatically transcribe podcast audio across multiple European languages. Generated emotionally-aware subtitles by mapping recognised emotional tone to text-to-speech output for localised, expressive delivery.</p>
+                    <div class="tech-stack">NLP • Speech-to-Text • Emotion Recognition • Python</div>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <h3>DQA: Data Quality Assessment Service</h3>
+                    </div>
+                    <p>Designed and built internal data quality service adopted by analysts and integrated across data pipelines at Sertis. Provided automated summary statistics and configurable validation rules via publish-subscribe architecture, exposing REST APIs and Web UI for self-serve data quality monitoring across the organisation.</p>
+                    <div class="tech-stack">Python • REST APIs • Data Validation • Microservices</div>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <h3>Petabyte-Scale Infrastructure</h3>
+                    </div>
+                    <p>Sole data engineer responsible for end-to-end data infrastructure handling petabytes of data across real-time streaming and batch pipelines. Designed and administered AWS Redshift data warehouse, managed Qubole platform including Hive, Spark, and Airflow clusters while maintaining data governance and quality standards at scale.</p>
+                    <div class="tech-stack">AWS Redshift • Apache Spark • Airflow • Qubole • Data Warehousing</div>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <h3>Demand Forecasting ML Pipeline</h3>
+                    </div>
+                    <p>Delivered two-phase engagement for multinational consumer goods company. Phase one: designed ETL pipeline to Azure SQL DB enabling downstream analytics. Phase two: architected cloud infrastructure on Azure and Databricks to host and serve demand forecasting ML model for production deployment.</p>
+                    <div class="tech-stack">Microsoft Azure • Databricks • Azure SQL DB • ML Infrastructure • ETL</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <h2>Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Sep 2020 - Present</div>
+                        <div class="timeline-role">Senior Data Engineer</div>
+                        <div class="timeline-company">Zalando • Berlin, Germany</div>
+                        <p>Leading data lakehouse migration of 100+ production pipelines from Oracle and Exasol to AWS and Databricks. Architecting robust ETL infrastructure with comprehensive monitoring, fault handling, and data quality governance. Driving cost optimisation through infrastructure modernisation.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Jun 2018 - Aug 2020</div>
+                        <div class="timeline-role">Data Engineer</div>
+                        <div class="timeline-company">Sertis • Bangkok, Thailand</div>
+                        <p>Architected cloud and on-premise data solutions for 10+ enterprise clients across retail, finance, healthcare, and telco on AWS, GCP, and Azure. Developed internal self-serve tooling for data scientists covering infrastructure provisioning and data wrangling, containerised with Docker and Kubernetes.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Dec 2016 - Jun 2018</div>
+                        <div class="timeline-role">Data Engineer</div>
+                        <div class="timeline-company">iflix • Kuala Lumpur, Malaysia</div>
+                        <p>Sole data engineer responsible for end-to-end infrastructure handling petabytes of data. Designed and administered AWS Redshift data warehouse with significant improvements in query performance. Managed Qubole platform including Hive, Spark, and Airflow clusters at scale.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Aug 2015 - Dec 2016</div>
+                        <div class="timeline-role">Software Engineer (Data / Full Stack)</div>
+                        <div class="timeline-company">Jirnexu • Kuala Lumpur, Malaysia</div>
+                        <p>Sole data and software engineer driving full development of SORA, an in-house CRM system. Engineered near real-time data synchronisation from DynamoDB to Redshift using DynamoDB Streams. Built dynamic query builder for non-technical teams to access customer data.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Nov 2010 - Jun 2015</div>
+                        <div class="timeline-role">BI Engineer</div>
+                        <div class="timeline-company">MTN Syria • Damascus, Syria</div>
+                        <p>Contributed to revenue assurance initiatives identifying and recovering millions in lost revenue. Automated reconciliation processes and built monitoring systems to detect revenue leakage. Improved billing accuracy through Oracle PL/SQL development and BSCS iX administration.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <p>I'm open to new opportunities, collaborations, and conversations about data engineering and AI/ML. Feel free to reach out through any of the following channels:</p>
+                <div class="contact-links">
+                    <a href="mailto:sameh.shar@gmail.com" class="contact-link">
+                        <span>✉</span> Email
+                    </a>
+                    <a href="https://github.com/sameh-sharaf" target="_blank" class="contact-link">
+                        <span>⚡</span> GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/samehsharaf" target="_blank" class="contact-link">
+                        <span>💼</span> LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Sameh Sharaf. Built with curiosity.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const targetPosition = target.offsetTop - navHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = 'var(--accent)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
