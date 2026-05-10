@@ -7,6 +7,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        (function() {
+            const saved = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (saved === 'dark' || (!saved && prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
     <style>
         :root {
             --bg-primary: #fafafa;
@@ -17,6 +26,21 @@
             --accent-hover: #1e40af;
             --border: #e5e5e5;
             --code-bg: #f5f5f5;
+            --nav-bg: rgba(250, 250, 250, 0.95);
+            --shadow: rgba(0, 0, 0, 0.06);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #111111;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #ededed;
+            --text-secondary: #999999;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border: #2a2a2a;
+            --code-bg: #1f1f1f;
+            --nav-bg: rgba(17, 17, 17, 0.95);
+            --shadow: rgba(0, 0, 0, 0.3);
         }
 
         * {
@@ -32,6 +56,7 @@
             line-height: 1.7;
             font-size: 18px;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -78,7 +103,7 @@
         nav {
             position: sticky;
             top: 0;
-            background: rgba(250, 250, 250, 0.95);
+            background: var(--nav-bg);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
             padding: 20px 0;
@@ -92,6 +117,8 @@
             gap: 40px;
             font-family: 'IBM Plex Mono', monospace;
             font-size: 14px;
+            align-items: center;
+            width: 100%;
         }
 
         nav a {
@@ -186,7 +213,7 @@
             font-size: 16px;
             color: var(--text-secondary);
             padding: 8px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border);
             transition: all 0.3s ease;
         }
 
@@ -223,7 +250,7 @@
 
         .project:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            box-shadow: 0 8px 24px var(--shadow);
         }
 
         .project-header {
@@ -345,6 +372,28 @@
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
 
+        /* Theme toggle */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 16px;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
         /* Footer */
         footer {
             padding: 60px 0;
@@ -437,6 +486,7 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀️</button></li>
             </ul>
         </div>
     </nav>
@@ -672,6 +722,23 @@
                     link.style.color = 'var(--accent)';
                 }
             });
+        });
+
+        // Theme toggle
+        const toggle = document.getElementById('theme-toggle');
+        const root = document.documentElement;
+
+        function updateToggleIcon() {
+            toggle.textContent = root.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+        }
+
+        updateToggleIcon();
+
+        toggle.addEventListener('click', () => {
+            const isDark = root.getAttribute('data-theme') === 'dark';
+            root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+            updateToggleIcon();
         });
     </script>
 </body>
